@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MovieViewModel : ViewModel() {
+
     private val repository = MovieRepository()
 
     private val _uiState = MutableStateFlow(MovieUiState())
@@ -44,8 +45,6 @@ class MovieViewModel : ViewModel() {
     }
 
 }
-
-
 
 data class MovieUiState(
     val movies: List<Movie> = emptyList(),

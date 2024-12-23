@@ -25,9 +25,7 @@ import coil3.compose.AsyncImage
 fun MovieScreen(
     viewModel: MovieViewModel
 ) {
-
     val uiState by viewModel.uiState.collectAsState()
-
     Column(
         modifier = Modifier.fillMaxSize()
             .padding(16.dp)
@@ -43,13 +41,12 @@ fun MovieScreen(
             }
             else ->  {
                 MovieList(uiState.movies)
+                //MovieList(modifier = Modifier, viewModel.pager)
             }
         }
-
         Button(onClick ={ viewModel.loadMovies() }) {
             Text("Load")
         }
-
     }
 }
 
