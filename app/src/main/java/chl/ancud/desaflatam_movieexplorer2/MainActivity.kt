@@ -16,6 +16,7 @@ import chl.ancud.desaflatam_movieexplorer2.modelos.MovieViewModel
 import chl.ancud.desaflatam_movieexplorer2.presentacion.MovieScreen
 import chl.ancud.desaflatam_movieexplorer2.ui.theme.DesafLatam_MovieExplorer2Theme
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val viewModel: MovieViewModel by viewModels()

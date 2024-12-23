@@ -58,6 +58,7 @@ fun MovieList(movies: List<Movie>) {
     LazyColumn {
         items(movies) { movie ->
             MovieItem(movie)
+            Spacer(modifier = Modifier.padding(8.dp))
         }
     }
 }
@@ -67,12 +68,12 @@ fun MovieItem(movie: Movie) {
     Card {
         Column {
             Text(movie.title)
-            Spacer(modifier = Modifier.padding(16.dp))
+            Spacer(modifier = Modifier.padding(8.dp))
             AsyncImage(
                 model = movie.poster(),
                 contentDescription = ""
             )
-            Spacer(modifier = Modifier.padding(16.dp))
+            Spacer(modifier = Modifier.padding(8.dp))
             Text(movie.overview)
         }
     }
