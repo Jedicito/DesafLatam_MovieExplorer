@@ -41,7 +41,6 @@ fun MovieScreen(
             }
             else ->  {
                 MovieList(uiState.movies)
-                //MovieList(modifier = Modifier, viewModel.pager)
             }
         }
         Button(onClick ={ viewModel.loadMovies() }) {
