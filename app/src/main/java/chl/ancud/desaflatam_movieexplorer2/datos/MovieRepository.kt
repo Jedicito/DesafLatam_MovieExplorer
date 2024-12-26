@@ -9,9 +9,19 @@ class MovieRepository {
 
     suspend fun getPopularMovies(page: Int) : Result<List<Movie>> {
         return try {
-            val response = api.searchMovies(
+            val response = api.getPopularMovies(
                 page = page,
-                query = "The godfather"
+            )
+            Result.success(response.movies)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getDetailsMovie(movieId: Int) : Result<List<Movie>> {
+        return try {
+            val response = api.getDetailsMovie(
+                movieId = movieId,
             )
             Result.success(response.movies)
         } catch (e: Exception) {

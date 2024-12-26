@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -27,10 +29,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import chl.ancud.desaflatam_movieexplorer2.modelos.MovieViewModel
+import coil3.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,11 +45,11 @@ fun MovieDetailScreen(
     navController: NavController = rememberNavController()
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val task = uiState.movies.find { it.id == movieId }
+    val movie = uiState.movies.find { it.id == movieId }
 
-    if (task == null) {
+    if (movie == null) {
         Text(
-            text = "Task not found",
+            text = "Task not found $movieId",
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier
                 .fillMaxSize()
@@ -70,33 +74,43 @@ fun MovieDetailScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues),
+                .padding(paddingValues)
+                .verticalScroll(rememberScrollState()),
             // .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = task.title,
+                text = movie.title,
                 style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
 
             Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                AsyncImage(
+                    model = movie.poster(),
+                    contentDescription = ""
+                )
+
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = movie.overview,
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Toggle Completion Button
-                Button(
-                    onClick = { },
-                    shape = MaterialTheme.shapes.medium,
-                    contentPadding = PaddingValues(12.dp)
-                ) {
-                    Text(text = "ola")
-                }
-                
                 Button(
                     onClick = {},
                     shape = MaterialTheme.shapes.medium,
@@ -105,9 +119,19 @@ fun MovieDetailScreen(
                         containerColor = Color.Red
                     )
                 ) {
-                    Text(text = "Remove Task", color = Color.White)
+                    Text(text = "Favoritos", color = Color.White)
                 }
             }
         }
     }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun MovieDetailScreenPreview() {
+    MovieDetailScreen(
+        movieId = 1,
+        onBack = {},
+        navController = rememberNavController()
+    )
 }

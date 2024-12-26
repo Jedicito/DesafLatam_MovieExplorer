@@ -13,7 +13,12 @@ interface MovieApi {
     @GET("search/movie")
     suspend fun searchMovies(
         @Query("query") query: String,
-        @Query("page") page: Int = 2
+        @Query("page") page: Int = 1
+    ): MovieResponse
+
+    @GET("movie/popular")
+    suspend fun getDetailsMovie(
+        @Query("movieId") movieId:  Int = 0,
     ): MovieResponse
 
 }
