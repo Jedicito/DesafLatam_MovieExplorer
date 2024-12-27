@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrainsKotlinSerialization)
     id("com.google.devtools.ksp")
+    id("androidx.room")
 }
 
 android {
@@ -47,6 +48,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+    room {
+        schemaDirectory("$projectDir/schemas")
     }
     buildFeatures {
         compose = true
@@ -94,4 +98,15 @@ dependencies {
 
     //Paginación
     implementation(libs.androidx.paging.compose)
+
+    implementation(libs.androidx.room.runtime)
+    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
+    // See Add the KSP plugin to your project
+    ksp(libs.androidx.room.compiler)
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation(libs.androidx.room.ktx)
+    // optional - Test helpers
+    testImplementation(libs.androidx.room.testing)
+    // optional - Paging 3 Integration
+    implementation(libs.androidx.room.paging)
 }
