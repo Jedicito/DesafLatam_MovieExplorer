@@ -1,13 +1,16 @@
 package chl.ancud.desaflatam_movieexplorer2.datos
 
-import chl.ancud.desaflatam_movieexplorer2.datos.remoto.RetrofitClient
+import chl.ancud.desaflatam_movieexplorer2.datos.remoto.MovieApi
 import chl.ancud.desaflatam_movieexplorer2.modelos.Movie
+import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
+open class MovieRepository @Inject constructor(
+    private val api: MovieApi
+) {
 
-class MovieRepository {
-    private val api = RetrofitClient.movieApi
-
-    suspend fun getPopularMovies(page: Int) : Result<List<Movie>> {
+    open suspend fun getPopularMovies(page: Int) : Result<List<Movie>> {
         return try {
             val response = api.getPopularMovies(
                 page = page,

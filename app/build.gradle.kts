@@ -7,6 +7,9 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinSerialization)
     id("com.google.devtools.ksp")
     id("androidx.room")
+
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -109,4 +112,11 @@ dependencies {
     testImplementation(libs.androidx.room.testing)
     // optional - Paging 3 Integration
     implementation(libs.androidx.room.paging)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+}
+
+kapt {
+    correctErrorTypes = true
 }

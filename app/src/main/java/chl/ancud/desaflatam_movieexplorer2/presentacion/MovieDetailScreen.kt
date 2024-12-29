@@ -33,98 +33,111 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import chl.ancud.desaflatam_movieexplorer2.datos.MovieRepository
 import chl.ancud.desaflatam_movieexplorer2.modelos.MovieViewModel
 import coil3.compose.AsyncImage
+import javax.inject.Inject
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MovieDetailScreen(
-    movieId: Int,
-    viewModel: MovieViewModel = MovieViewModel(),
-    onBack: () -> Unit,
-    navController: NavController = rememberNavController()
+/*
+class MovieDetailScreen @Inject constructor(
+    private val repository: MovieRepository,
+    private val viewModel: MovieViewModel,
+    private val onBack: () -> Unit,
+    private val navController: NavController
 ) {
-    val uiState by viewModel.uiState.collectAsState()
-    val movie = uiState.movies.find { it.id == movieId }
+*/
 
-    if (movie == null) {
-        Text(
-            text = "Task not found $movieId",
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            textAlign = TextAlign.Center
-        )
-        return
-    }
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun MovieDetailScreen(
+        movieId: Int,
+        viewModel: MovieViewModel,
+        onBack: () -> Unit,
+        navController: NavController = rememberNavController()
+    ) {
+        val uiState by viewModel.uiState.collectAsState()
+        val movie = uiState.movies.find { it.id == movieId }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Task Details") },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                    }
-                }
-            )
-        }
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .verticalScroll(rememberScrollState()),
-            // .padding(16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
+        if (movie == null) {
             Text(
-                text = movie.title,
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.fillMaxWidth(),
+                text = "Task not found $movieId",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
                 textAlign = TextAlign.Center
             )
+            return
+        }
 
-            Spacer(modifier = Modifier.height(16.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Task Details") },
+                    navigationIcon = {
+                        IconButton(onClick = onBack) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        }
+                    }
+                )
+            }
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .verticalScroll(rememberScrollState()),
+                // .padding(16.dp),
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
-                AsyncImage(
-                    model = movie.poster(),
-                    contentDescription = ""
+                Text(
+                    text = movie.title,
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
                 )
 
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = movie.overview,
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center
-            )
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Button(
-                    onClick = {},
-                    shape = MaterialTheme.shapes.medium,
-                    contentPadding = PaddingValues(12.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Red
-                    )
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "Favoritos", color = Color.White)
+                    AsyncImage(
+                        model = movie.poster(),
+                        contentDescription = ""
+                    )
+
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = movie.overview,
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Button(
+                        onClick = {},
+                        shape = MaterialTheme.shapes.medium,
+                        contentPadding = PaddingValues(12.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Red
+                        )
+                    ) {
+                        Text(text = "Favoritos", color = Color.White)
+                    }
                 }
             }
         }
     }
-}
+//}
+/*
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
@@ -134,4 +147,4 @@ fun MovieDetailScreenPreview() {
         onBack = {},
         navController = rememberNavController()
     )
-}
+}*/

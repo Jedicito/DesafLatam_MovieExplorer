@@ -7,7 +7,9 @@ import androidx.activity.viewModels
 import chl.ancud.desaflatam_movieexplorer2.modelos.MovieViewModel
 import chl.ancud.desaflatam_movieexplorer2.presentacion.navegacion.NavigationWrapper
 import chl.ancud.desaflatam_movieexplorer2.ui.theme.DesafLatam_MovieExplorer2Theme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val viewModel: MovieViewModel by viewModels()
