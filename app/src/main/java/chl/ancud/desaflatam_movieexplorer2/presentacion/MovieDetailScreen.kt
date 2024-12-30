@@ -60,7 +60,7 @@ class MovieDetailScreen @Inject constructor(
 
         if (movie == null) {
             Text(
-                text = "Task not found $movieId",
+                text = "Pelicula no encontrada con ID $movieId",
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier
                     .fillMaxSize()
@@ -73,7 +73,7 @@ class MovieDetailScreen @Inject constructor(
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("Task Details") },
+                    title = { Text(movie.title) },
                     navigationIcon = {
                         IconButton(onClick = onBack) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -90,13 +90,6 @@ class MovieDetailScreen @Inject constructor(
                 // .padding(16.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = movie.title,
-                    style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
-
                 Spacer(modifier = Modifier.height(16.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),

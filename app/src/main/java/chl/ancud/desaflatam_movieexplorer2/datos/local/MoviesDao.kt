@@ -10,7 +10,7 @@ import androidx.room.Query
 interface MoviesDao {
 
     @Query("Select * from movies")
-    suspend fun getMovies(): List<MovieEntity>
+    suspend fun getPopularMovies(): List<MovieEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun inserMovie(movie: MovieEntity)
