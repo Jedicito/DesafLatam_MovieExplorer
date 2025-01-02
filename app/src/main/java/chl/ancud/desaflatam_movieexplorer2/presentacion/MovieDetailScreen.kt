@@ -60,7 +60,7 @@ class MovieDetailScreen @Inject constructor(
 
         if (movie == null) {
             Text(
-                text = "Pelicula no encontrada con ID $movieId",
+                text = "Película no encontrada con ID $movieId",
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier
                     .fillMaxSize()

@@ -13,7 +13,7 @@ interface MoviesDao {
     suspend fun getPopularMovies(): List<MovieEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun inserMovie(movie: MovieEntity)
+    suspend fun insertMovie(movie: MovieEntity)
 
     @Delete
     suspend fun deleteMovie(movie: MovieEntity)
