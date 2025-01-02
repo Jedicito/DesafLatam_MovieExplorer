@@ -9,5 +9,5 @@ import androidx.room.RoomDatabase
     exportSchema = false
 )
 abstract class MoviesDatabase : RoomDatabase() {
-    abstract val moviesDao: MoviesDao
+    abstract fun getMoviesDao(): MoviesDao
 }
