@@ -1,5 +1,6 @@
 package chl.ancud.desaflatam_movieexplorer2.datos
 
+import chl.ancud.desaflatam_movieexplorer2.datos.local.MoviesDao
 import chl.ancud.desaflatam_movieexplorer2.datos.remoto.MovieApi
 import chl.ancud.desaflatam_movieexplorer2.modelos.Movie
 import javax.inject.Inject
@@ -7,12 +8,13 @@ import javax.inject.Singleton
 
 @Singleton
 open class MovieRepository @Inject constructor(
-    private val api: MovieApi
+    private val moviesApi: MovieApi,
+    private val moviesDao: MoviesDao
 ) {
 
-    open suspend fun getPopularMovies(page: Int) : Result<List<Movie>> {
+    suspend fun getPopularMoviesApi(page: Int) : Result<List<Movie>> {
         return try {
-            val response = api.getPopularMovies(
+            val response = moviesApi.getPopularMovies(
                 page = page,
             )
             Result.success(response.movies)
@@ -21,9 +23,18 @@ open class MovieRepository @Inject constructor(
         }
     }
 
-    suspend fun getDetailsMovie(movieId: Int) : Result<List<Movie>> {
+    suspend fun getFavoritesMoviesRoom() : Result<List<Movie>> {
         return try {
-            val response = api.getDetailsMovie(
+            val response = moviesDao.getFavoritesMovies()
+            Result.success(response.map { it.toMovie() })
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getDetailsMovieApi(movieId: Int) : Result<List<Movie>> {
+        return try {
+            val response = moviesApi.getDetailsMovie(
                 movieId = movieId,
             )
             Result.success(response.movies)

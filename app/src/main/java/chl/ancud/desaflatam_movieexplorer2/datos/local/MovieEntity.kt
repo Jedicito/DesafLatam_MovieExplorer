@@ -22,4 +22,21 @@ data class MovieEntity(
     @ColumnInfo(name = "vote_average") val voteAverage: Double,
     @ColumnInfo(name = "vote_count") val voteCount: Int,
     @ColumnInfo(name = "is_favorite") val isFavorite: Boolean = false
-)
+) {
+    fun toMovie() = Movie(
+        id = movieId,
+        adult = adult,
+        backdropPath = backdropPath,
+        genreIds = emptyList(),
+        originalLanguage = originalLanguage,
+        originalTitle = originalTitle,
+        overview = overview,
+        popularity = popularity,
+        posterPath = posterPath,
+        releaseDate = releaseDate,
+        title = title,
+        video = video,
+        voteAverage = voteAverage,
+        voteCount = voteCount,
+    )
+}

@@ -30,7 +30,7 @@ class MovieViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
 
-            repository.getPopularMovies(1)
+            repository.getPopularMoviesApi(1)
                 .onSuccess { movies ->
                     _uiState.update {
                         it.copy(
